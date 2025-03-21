@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabuada Divertida!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff; /* Azul bebê */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        header h1 {
+            color: #ff69b4; /* Rosa choque */
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px #fdd;
+        }
+
+        main {
+            margin-top: 20px;
+        }
+
+        #entradaMultiplicador {
+            margin-bottom: 20px;
+        }
+
+        #entradaMultiplicador label {
+            display: block;
+            font-size: 1.2em;
+            color: #3cb371; /* Verde médio */
+            margin-bottom: 5px;
+        }
+
+        #multiplicador {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+            width: 80px;
+            text-align: center;
+        }
+
+        #alterarMultiplicador {
+            background-color: #ffa07a; /* Salmão claro */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+
+        #alterarMultiplicador:hover {
+            background-color: #ff8c69; /* Tom de salmão mais escuro */
+        }
+
+        #resultado {
+            margin-top: 20px;
+        }
+
+        #resultado h2 {
+            color: #3cb371; /* Verde médio */
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        #listaResultados {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #listaResultados li {
+            font-size: 1.2em;
+            color: #4682b4; /* Azul aço */
+            margin-bottom: 10px;
+            padding: 8px;
+            background-color: #e0ffff; /* Azul claro */
+            border-radius: 8px;
+            border-left: 5px solid #ffa07a; /* Salmão claro */
+            text-align: left;
+        }
+
+        footer {
+            margin-top: 30px;
+            color: #888;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tabuada Alegre!</h1>
+        </header>
+        <main>
+            <div id="entradaMultiplicador">
+                <label for="multiplicador">Digite o número para a tabuada:</label>
+                <input type="number" id="multiplicador" value="2">
+                <button id="alterarMultiplicador" onclick="atualizarTabuada()">Mudar Tabuada</button>
+            </div>
+
+            <div id="resultado">
+                <h2>Os resultados são:</h2>
+                <ul id="listaResultados">
+                    </ul>
+            </div>
+        </main>
+        <footer>
+            <p>&copy; Tabuada Mágica do Torres</p>
+        </footer>
+    </div>
+
+    <script>
+        let multiplicador = parseInt(document.getElementById('multiplicador').value);
+        const listaResultados = document.getElementById('listaResultados');
+
+        function gerarTabuada() {
+            listaResultados.innerHTML = ''; // Limpa a lista anterior
+            for (let i = 1; i <= 10; i++) {
+                const resultado = i * multiplicador;
+                const listItem = document.createElement('li');
+                listItem.textContent = `${i} x ${multiplicador} = ${resultado}`;
+                listaResultados.appendChild(listItem);
+            }
+        }
+
+        function atualizarTabuada() {
+            const novoMultiplicador = parseInt(document.getElementById('multiplicador').value);
+            if (!isNaN(novoMultiplicador)) {
+                multiplicador = novoMultiplicador;
+                gerarTabuada();
+            } else {
+                alert('Por favor, digite um número inteiro válido.');
+                document.getElementById('multiplicador').value = multiplicador; // Restaura o valor anterior
+            }
+        }
+
+        // Gera a tabuada inicial com o valor padrão (2)
+        gerarTabuada();
+    </script>
+</body>
+</html>
